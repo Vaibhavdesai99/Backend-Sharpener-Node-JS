@@ -1,30 +1,24 @@
-import express from "express";
-
+const express = require("express");
+const bodyparser = require("body-parser");
 const app = express();
 
-app.get("/jokes", (req, res) => {
-  const jokes = [
-    {
-      id: 1,
-      Name: "The Big Boss",
-      Author: "Vaibhav Desai",
-    },
-    {
-      id: 2,
-      Name: "The secret superstar",
-      Author: "Pooja Hedge",
-    },
-    {
-      id: 3,
-      Name: "The  superstar",
-      Author: "Swati Desai",
-    },
-  ];
-  res.send(jokes);
+//to get data from req.body we used this if we not using this then it shows undefined .
+app.use(bodyparser.urlencoded());
+
+app.use("/add-product", (req, res, next) => {
+  console.log("In the Another Middleware");
+  res.send(
+    '<form action="/product" method="POST"><input type="text" name="title" ><button>ADD PRODUCT</button></form>'
+  );
 });
 
-const port = process.env.PORT || 3005;
-
-app.listen(port, () => {
-  console.log(`server listening to port ${port}`);
+app.use("/product", (req, res, next) => {
+  console.log(req.body);
+  res.redirect("/");
 });
+app.use("/", (req, res, next) => {
+  console.log("In the Another Middleware");
+  res.send("<h1>Hello from express</h1>");
+});
+
+app.listen(3000);
