@@ -14,8 +14,8 @@ const shopRoutes = require("../Backend-Sharpener/routes/shop");
 app.use(bodyparser.urlencoded({ extended: false }));
 
 // Using the imported routes
+app.use("/admin", adminRoutes);
 app.use(shopRoutes);
-app.use(adminRoutes);
 
 // Middleware for handling 404 errors (Page Not Found)
 app.use((req, res, next) => {
