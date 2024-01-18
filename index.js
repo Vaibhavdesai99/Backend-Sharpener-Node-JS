@@ -3,12 +3,12 @@ const bodyparser = require("body-parser");
 const app = express();
 
 //to get data from req.body we used this if we not using this then it shows undefined .
-app.use(bodyparser.urlencoded());
+app.use(bodyparser.urlencoded({ extended: false }));
 
 app.use("/add-product", (req, res, next) => {
   console.log("In the Another Middleware");
   res.send(
-    '<form action="/product" method="POST"><input type="text" name="title" ><button>ADD PRODUCT</button></form>'
+    '<form action="/product" method="POST"><input type="text" name="title" > <input type="number" name="size"><button>ADD PRODUCT</button></form>'
   );
 });
 
